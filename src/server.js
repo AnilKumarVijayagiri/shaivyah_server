@@ -26,10 +26,12 @@ const app = express();
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: "https://shaivyah-client.vercel.app", // your frontend URL
+  origin: process.env.CLIENT_URL || "https://shaivyah-client.vercel.app", // your frontend URL
   credentials: true, // allow cookies/auth headers
 }));
 app.use(morgan('dev'));
+
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,5 +53,10 @@ app.use("/api/categories", categoryRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, ()=> console.log(`API http://localhost:${PORT}`));
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, ()=> console.log(`API http://localhost:${PORT}`));
+app.listen(PORT, ()=> {
+  console.log(`✅ API running on port ${PORT}`);
+});
+
