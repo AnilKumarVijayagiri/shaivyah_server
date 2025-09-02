@@ -5,7 +5,7 @@ import {
   updateCart,
   removeFromCart,
   clearCart,
-} from "../controllers/cartController.js";
+} from "../Controllers/cartController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -17,3 +17,4 @@ router.delete("/remove", protect, removeFromCart);
 router.delete("/clear", protect, clearCart);
 
 export default router;
+
